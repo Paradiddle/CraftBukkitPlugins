@@ -1,0 +1,62 @@
+name: ShareChest
+version: 0.1
+main: com.github.paradiddle.sharechest.ShareChestPlugin
+commands:
+  scshare:
+    description: This command will share a chest.
+    usage: /scshare [name] (looking at chest to share)
+    permission: sharechest.scshare
+    permission-message: You don't have <permission>
+  sclist:
+    description: This command will list all shared chests.
+    usage: /sclist
+    permission: sharechest.sclist
+    permission-message: You don't have <permission>
+  scopen:
+    description: This command will open a shared chest.
+    usage: /scopen [chest name]
+    permission: sharechest.scopen
+    permission-message: You don't have <permission>
+  scunshare:
+    description: This command will unshare a chest.
+    usage: /scunshare [chest name]
+    permission: sharechest.scunshare
+    permission-message: You don't have <permission>
+  sclock:
+    description: This command will lock a chest.
+    usage: /sclock [chest name]
+    permission: sharechest.sclock
+    permission-message: You don't have <permission>
+  scunlock:
+    description: This command will unlock a chest.
+    usage: /scunlock [chest name]
+    permission: sharechest.scunlock
+    permission-message: You don't have <permission>
+permissions:
+  sharechest.*:
+    description: Gives access to all sharechest commands
+    children:
+      sharechest.scshare: true
+      sharechest.sclist: true
+      sharechest.scopen: true
+      sharechest.scunshare: true
+      sharechest.sclock: true
+      sharechest.scunlock: true
+  sharechest.scshare:
+    description: Allows you to share chests
+    default: true
+  sharechest.sclist:
+    description: Allows you to view a list of shared chests
+    default: true
+  sharechest.scopen:
+    description: Allows you to open a shared chest
+    default: true
+  sharechest.scunshare:
+    description: Allows you to unshare a chest you shared
+    default: true
+  sharechest.sclock:
+    description: Allows you to lock a chest you shared
+    default: true
+  sharechest.scunlock:
+    description: Allows you to unlock a chest you shared
+    default: true

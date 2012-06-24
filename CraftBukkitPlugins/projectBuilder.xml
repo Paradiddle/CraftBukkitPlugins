@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="craftbukkitplugins" default="deployremote" basedir=".">
+	<property file="build.properties" />
+	<property file="ftp.properties" />
+
+	<target name="makejar" depends="build" description="Create the plugin JAR">
+		<echo message="Creating JAR ${jarname}" />
+		<jar jarfile="${jarname}" basedir="${build}" />
+	</target>
+
+	<target name="deployremote" depends="makejar" description="Deploy JAR to server /plugins folder">
+		<echo message="deploying to ${ftphost}" />
+		<ftp server="${ftphost}" remotedir="${ftpbasedir}" userid="${ftpusername}" password="${ftppassword}">
+			<fileset dir="." includes="${jarname}" />
+		</ftp>
+		<antcall target="clean" />
+	</target>
+	
+	<target name="clean">
+		<delete>
+			<fileset dir="." includes="${jarname}" />
+		</delete>
+		<delete dir="${build}"/>
+	</target>
+	
+	<target name="init" description="Setup folders for compilation.">
+		<tstamp />
+		<mkdir dir="${build}" />
+	</target>
+	
+	<path id="external.jars">
+		<fileset dir="libs" includes="**/*.jar" />
+	</path>
+	
+	<target name="build" depends="init" description="Build desired project.">
+		<echo message="./src/com/github/paradiddle/${package}/"/>
+		<javac destdir="${build}"
+				includeantruntime="false"
+				sourcepath=""
+				srcdir="src"
+				includes="com/github/paradiddle/${package}/**"
+				debug="on"
+				classpathref="external.jars">
+		</javac>
+		<copy file="./src/com/github/paradiddle/${package}/plugin.yml"
+				todir="${build}" />
+	</target>
+	
+	<target name="deploylocal" depends="makejar" description="Deploy JAR to local folder">
+		<echo message="deploying locally" />
+		<move file="${jarname}" todir="${build}" />
+	</target>
+</project>

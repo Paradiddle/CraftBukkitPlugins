@@ -1,0 +1,14 @@
+name: RockPaperScissors
+version: 0.1
+main: com.github.paradiddle.rockpaperscissors.RockPaperScissors
+commands:
+  rps:
+    description: This command either creates a game of rps or responds to one.
+    usage: /rps [username] [rock/paper/scissors]
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+  dig:
+    description: This command will share a chest.
+    usage: /rps [username] [rock/paper/scissors]
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
