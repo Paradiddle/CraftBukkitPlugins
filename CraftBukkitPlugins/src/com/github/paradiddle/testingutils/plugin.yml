@@ -1,0 +1,19 @@
+name: TestUtilities
+version: 0.1
+main: com.github.paradiddle.testingutils.TestUtilities
+commands:
+  binfo:
+    description: This command lists information about a block at a certain location.
+    usage: /binfo [x] [y] [z] [world_name]
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+  binfo:
+    description: This command toggles the crouch looking at block.
+    usage: /binfo [true/false]
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+  worlds:
+    description: This command lists all world names
+    usage: /worlds
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>

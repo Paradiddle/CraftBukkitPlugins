@@ -27,7 +27,7 @@ public class RockPaperScissors extends JavaPlugin implements CommandExecutor
 	@Override
 	public void onEnable()
 	{
-		getLogger().log(Level.INFO, "YO DIS IS AUTOBUILD V2 BIOTCH.");
+		getLogger().log(Level.INFO, "YO DIS IS AUTOBUILD VMAC BITCHZ.");
 		getCommand("rps").setExecutor(this);
 		getCommand("dig").setExecutor(this);
 		// TODO Auto-generated method stub
