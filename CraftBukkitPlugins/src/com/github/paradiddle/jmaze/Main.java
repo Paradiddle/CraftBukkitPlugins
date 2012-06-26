@@ -10,6 +10,8 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import com.github.paradiddle.jmaze.generators.RecursiveDivision;
+
 public class Main extends JFrame implements KeyListener
 {
 	private int blockWidth = 5;
@@ -17,8 +19,6 @@ public class Main extends JFrame implements KeyListener
 
 	private int mazeWidth = 71;
 	private int mazeHeight = 71;
-
-	private boolean running = true;
 
 	private Maze maze;
 

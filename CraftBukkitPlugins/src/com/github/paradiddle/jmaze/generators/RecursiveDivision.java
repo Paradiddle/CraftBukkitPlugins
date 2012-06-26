@@ -1,4 +1,8 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.jmaze.generators;
+
+import com.github.paradiddle.jmaze.Main;
+import com.github.paradiddle.jmaze.Maze;
+
 public class RecursiveDivision
 {
 	public static void generateMaze(Maze maze)
