@@ -4,11 +4,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.github.paradiddle.jmaze.generators.DepthFirstSearch;
+import com.github.paradiddle.jmaze.generators.MazeGenerator;
+import com.github.paradiddle.jmaze.generators.RecursiveDivision;
 
 public class SettingsPanel extends JPanel implements ActionListener
 {
@@ -16,13 +23,32 @@ public class SettingsPanel extends JPanel implements ActionListener
 	private JLabel lblMazeWidth, lblMazeHeight;
 	private JButton btnGenerate;
 	private JButton btnSolve;
-
+	private JComboBox cbGenerationType;
+	
+	private LinkedHashMap<String, MazeGenerator> generators;
+	
 	private Main main;
+	
+	private DepthFirstSearch dfs;
+	private RecursiveDivision recursiveDivision;
 
 	public SettingsPanel(Main m)
 	{
 		this.main = m;
-
+		
+		this.setBorder(BorderFactory.createTitledBorder("Maze Generation Settings"));
+		
+		dfs = new DepthFirstSearch(main);
+		recursiveDivision = new RecursiveDivision(main);
+		
+		generators = new LinkedHashMap<String, MazeGenerator>();
+		generators.put("Recursive Division", recursiveDivision);
+		generators.put("Depth First Search", dfs);
+		
+		String[] mazeGenerationTypes = generators.keySet().toArray(new String[0]);
+		
+		cbGenerationType = new JComboBox(mazeGenerationTypes);
+		
 		tfMazeWidth = new JTextField(5);
 		tfMazeHeight = new JTextField(5);
 		
@@ -39,13 +65,16 @@ public class SettingsPanel extends JPanel implements ActionListener
 		btnSolve.addActionListener(this);
 
 		setLayout(new GridBagLayout());
+		
+		int y = 0;
+		
 		GridBagConstraints c = new GridBagConstraints();
 		c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(2, 2, 2, 2);
 		c.weightx = 0.5;
 		c.weighty = 0.0;
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = y++;
 
 		add(lblMazeWidth, c);
 
@@ -54,7 +83,7 @@ public class SettingsPanel extends JPanel implements ActionListener
 		add(tfMazeWidth, c);
 
 		c.gridx = 0;
-		c.gridy = 1;
+		c.gridy = y++;
 
 		add(lblMazeHeight, c);
 
@@ -62,13 +91,21 @@ public class SettingsPanel extends JPanel implements ActionListener
 
 		add(tfMazeHeight, c);
 
+		
 		c.gridx = 0;
-		c.gridwidth = 2;
-		c.gridy = 2;
+		c.gridy = y++;
+		add(cbGenerationType, c);
+		
+		c.gridx = 1;		
 		add(btnGenerate, c);
 
-		c.gridy = 3;
+		c.gridy = y++;
 		add(btnSolve, c);
+	}
+	
+	public MazeGenerator getMazeGenerator()
+	{
+		return generators.get(cbGenerationType.getSelectedItem());
 	}
 
 	@Override

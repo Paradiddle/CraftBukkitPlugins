@@ -3,17 +3,31 @@ package com.github.paradiddle.jmaze.generators;
 import com.github.paradiddle.jmaze.Main;
 import com.github.paradiddle.jmaze.Maze;
 
-public class RecursiveDivision
+public class RecursiveDivision implements MazeGenerator
 {
-	public static void generateMaze(Maze maze)
+	private Main main;
+	private Maze maze;
+
+	public RecursiveDivision()
 	{
-		RecursiveDivision.divide(maze, 0, 0, maze.width(), maze.height(), true);
+		this.main = null;
+	}
+	
+	public RecursiveDivision(Main main)
+	{
+		this.main = main;
+	}
+	
+	public void generateMaze(Maze maze)
+	{
+		this.maze = maze;
+		divide(0, 0, maze.width(), maze.height());
 	}
 
-	private static void divide(Maze m, int x, int y, int width, int height, boolean lastHoriz)
+	private void divide(int x, int y, int width, int height)
 	{
 		boolean horizontal = Main.rand.nextInt(2) == 0 ? true : false;
-		if (!lastHoriz)
+		if (horizontal)
 		{
 			int vPosRel, vPosAbs;
 			if(width <= 3)
@@ -35,10 +49,10 @@ public class RecursiveDivision
 			for (int i = x; i < width + x; i++)
 			{
 				if (i != x + randSpace)
-					m.set(i, vPosAbs, 1);
+					maze.set(i, vPosAbs, 1);
 			}
-			divide(m, x, vPosAbs, width, height - vPosRel, true);
-			divide(m, x, y, width, height - (height - vPosRel), true);
+			divide(x, vPosAbs, width, height - vPosRel);
+			divide(x, y, width, height - (height - vPosRel));
 		} else
 		{
 			int hPosRel, hPosAbs;
@@ -62,10 +76,10 @@ public class RecursiveDivision
 			for (int i = y; i < height + y; i++)
 			{
 				if(i != y + randSpace)
-					m.set(hPosAbs, i, 1);
+					maze.set(hPosAbs, i, 1);
 			}
-			divide(m, hPosAbs, y, width - hPosRel, height, false);
-			divide(m, x, y, width - (width - hPosRel), height, false);
+			divide(hPosAbs, y, width - hPosRel, height);
+			divide(x, y, width - (width - hPosRel), height);
 		}
 	}
 }
