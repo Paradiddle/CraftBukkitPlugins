@@ -1,4 +1,4 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.javamazegui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
@@ -10,6 +10,10 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import com.github.paradiddle.jmaze.Maze;
+import com.github.paradiddle.jmaze.MazeSolver;
+import com.github.paradiddle.jmaze.generators.RecursiveDivision;
+
 public class Main extends JFrame implements KeyListener
 {
 	private int blockWidth = 5;
@@ -17,8 +21,6 @@ public class Main extends JFrame implements KeyListener
 
 	private int mazeWidth = 71;
 	private int mazeHeight = 71;
-
-	private boolean running = true;
 
 	private Maze maze;
 
@@ -101,7 +103,7 @@ public class Main extends JFrame implements KeyListener
 	
 	public void solve()
 	{
-		MazeSolver.solve(this, maze);
+		MazeSolver.solve(maze);
 		mCanvas.repaint();
 	}
 

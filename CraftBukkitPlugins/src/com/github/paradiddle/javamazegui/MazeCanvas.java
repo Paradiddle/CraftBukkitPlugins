@@ -1,4 +1,4 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.javamazegui;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;

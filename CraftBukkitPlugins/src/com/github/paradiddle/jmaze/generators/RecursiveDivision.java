@@ -1,4 +1,7 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.jmaze.generators;
+
+import com.github.paradiddle.jmaze.Maze;
+
 public class RecursiveDivision
 {
 	public static void generateMaze(Maze maze)
@@ -8,7 +11,7 @@ public class RecursiveDivision
 
 	private static void divide(Maze m, int x, int y, int width, int height, boolean lastHoriz)
 	{
-		boolean horizontal = Main.rand.nextInt(2) == 0 ? true : false;
+		boolean horizontal = Maze.rand.nextInt(2) == 0 ? true : false;
 		if (!lastHoriz)
 		{
 			int vPosRel, vPosAbs;
@@ -23,11 +26,11 @@ public class RecursiveDivision
 				vPosAbs = y + 2;
 			} else
 			{
-				vPosRel = Main.rand.nextInt(((height - 3) / 2) - 1) + 1;
+				vPosRel = Maze.rand.nextInt(((height - 3) / 2) - 1) + 1;
 				vPosRel *= 2;
 				vPosAbs = y + vPosRel;
 			}
-			int randSpace = Main.rand.nextInt((width - 1) / 2) * 2 + 1;
+			int randSpace = Maze.rand.nextInt((width - 1) / 2) * 2 + 1;
 			for (int i = x; i < width + x; i++)
 			{
 				if (i != x + randSpace)
@@ -50,11 +53,11 @@ public class RecursiveDivision
 			}
 			else
 			{
-				hPosRel = Main.rand.nextInt(((width - 3) / 2) - 1) + 1;
+				hPosRel = Maze.rand.nextInt(((width - 3) / 2) - 1) + 1;
 				hPosRel *= 2;
 				hPosAbs = x + hPosRel;
 			}
-			int randSpace = Main.rand.nextInt((height - 1) / 2) * 2 + 1;
+			int randSpace = Maze.rand.nextInt((height - 1) / 2) * 2 + 1;
 			for (int i = y; i < height + y; i++)
 			{
 				if(i != y + randSpace)
