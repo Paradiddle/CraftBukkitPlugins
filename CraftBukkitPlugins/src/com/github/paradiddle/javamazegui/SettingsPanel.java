@@ -38,8 +38,8 @@ public class SettingsPanel extends JPanel implements ActionListener
 		
 		this.setBorder(BorderFactory.createTitledBorder("Maze Generation Settings"));
 		
-		dfs = new DepthFirstSearch(main);
-		recursiveDivision = new RecursiveDivision(main);
+		dfs = new DepthFirstSearch();
+		recursiveDivision = new RecursiveDivision();
 		
 		generators = new LinkedHashMap<String, MazeGenerator>();
 		generators.put("Recursive Division", recursiveDivision);

@@ -4,12 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-import com.github.paradiddle.javamazegui.Main;
 import com.github.paradiddle.jmaze.Maze;
+import com.github.paradiddle.jmaze.Utilities;
 
 public class DepthFirstSearch implements MazeGenerator
 {
-	private Main main;
 	private Maze maze;
 	
 	private Stack<Point> stack;
@@ -21,12 +20,6 @@ public class DepthFirstSearch implements MazeGenerator
 	
 	public DepthFirstSearch()
 	{
-		this.main = null;
-	}
-	
-	public DepthFirstSearch(Main main)
-	{
-		this.main = main;
 	}
 	
 	public void generateMaze(Maze maze)
@@ -62,7 +55,7 @@ public class DepthFirstSearch implements MazeGenerator
 			return;
 		}
 		
-		Dir rDir = dirs.remove(Main.rand.nextInt(dirs.size()));
+		Dir rDir = dirs.remove(Utilities.rand.nextInt(dirs.size()));
 		Point oneStep = curP.getRelativePoint(rDir, 1);
 		maze.set(oneStep.x, oneStep.y, 0);
 		Point twoStep = curP.getRelativePoint(rDir, 2);
