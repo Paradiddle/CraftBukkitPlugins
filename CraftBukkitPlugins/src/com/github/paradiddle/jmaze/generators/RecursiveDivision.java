@@ -1,6 +1,6 @@
 package com.github.paradiddle.jmaze.generators;
 
-import com.github.paradiddle.jmaze.Main;
+import com.github.paradiddle.javamazegui.Main;
 import com.github.paradiddle.jmaze.Maze;
 
 public class RecursiveDivision implements MazeGenerator

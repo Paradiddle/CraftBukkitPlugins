@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
-import com.github.paradiddle.jmaze.Main;
+import com.github.paradiddle.javamazegui.Main;
 import com.github.paradiddle.jmaze.Maze;
 
 public class DepthFirstSearch implements MazeGenerator

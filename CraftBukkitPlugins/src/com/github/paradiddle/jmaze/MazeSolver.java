@@ -1,11 +1,11 @@
 package com.github.paradiddle.jmaze;
+
+
 public class MazeSolver
 {
-	private static Main main;
 
-	public static void solve(Main main, Maze m)
+	public static void solve(Maze m)
 	{
-		MazeSolver.main = main;
 		boolean filledDeadEnd = true;
 		do
 		{
@@ -18,6 +18,8 @@ public class MazeSolver
 			{
 				if(m.get(i, j) == 0)
 					m.set(i, j, 3);
+				else if(m.get(i, j) == 2)
+					m.set(i, j, 0);
 			}
 		}
 	}

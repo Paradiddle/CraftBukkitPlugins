@@ -1,4 +1,5 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.javamazegui;
+
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -11,8 +12,9 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
+import com.github.paradiddle.jmaze.Maze;
+import com.github.paradiddle.jmaze.MazeSolver;
 import com.github.paradiddle.jmaze.generators.DepthFirstSearch;
-import com.github.paradiddle.jmaze.generators.RecursiveDivision;
 
 public class Main extends JFrame implements KeyListener
 {
@@ -27,8 +29,6 @@ public class Main extends JFrame implements KeyListener
 	private MazeCanvas mCanvas;
 	private SettingsPanel settings;
 	
-	private DepthFirstSearch dfs;
-	
 	public static Random rand = new Random();
 
 	public Main()
@@ -37,7 +37,6 @@ public class Main extends JFrame implements KeyListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		maze = new Maze(mazeWidth, mazeHeight);
-		dfs = new DepthFirstSearch(this);
 		
 		Container c = getContentPane();
 
@@ -104,7 +103,7 @@ public class Main extends JFrame implements KeyListener
 	
 	public void solve()
 	{
-		MazeSolver.solve(this, maze);
+		MazeSolver.solve(maze);
 		mCanvas.repaint();
 	}
 	

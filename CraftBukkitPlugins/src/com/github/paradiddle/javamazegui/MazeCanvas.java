@@ -1,8 +1,14 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.javamazegui;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Random;
+
+import javax.swing.JFrame;
 
 public class MazeCanvas extends Canvas
 {

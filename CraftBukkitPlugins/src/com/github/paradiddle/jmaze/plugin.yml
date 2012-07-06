@@ -1,0 +1,10 @@
+name: JMaze
+version: 0.1
+main: com.github.paradiddle.jmaze.MazePlugin
+commands:
+  maze:
+    description: This command generates a maze.
+    usage: /maze [width] [length]
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+

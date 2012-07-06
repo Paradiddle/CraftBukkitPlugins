@@ -1,8 +1,13 @@
 package com.github.paradiddle.jmaze;
+
+import java.util.Random;
+
 public class Maze
 {
 	private int[][] maze;
 
+	public static Random rand = new Random();
+	
 	public Maze(int width, int height)
 	{
 		maze = new int[width][height];
@@ -26,7 +31,7 @@ public class Maze
 			}
 		}
 		maze[1][0] = 0;
-		maze[width() - 1][height() - 2] = 0;
+		maze[width() - 2][height() - 1] = 0;
 	}
 
 	public int width()

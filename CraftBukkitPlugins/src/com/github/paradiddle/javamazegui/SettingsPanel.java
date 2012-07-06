@@ -1,4 +1,4 @@
-package com.github.paradiddle.jmaze;
+package com.github.paradiddle.javamazegui;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
