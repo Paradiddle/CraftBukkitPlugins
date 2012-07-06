@@ -27,59 +27,14 @@ public class RockPaperScissors extends JavaPlugin implements CommandExecutor
 	@Override
 	public void onEnable()
 	{
-		getLogger().log(Level.INFO, "YO DIS IS AUTOBUILD VMAC BITCHZ.");
 		getCommand("rps").setExecutor(this);
-		getCommand("dig").setExecutor(this);
-		// TODO Auto-generated method stub
 		super.onEnable();
-	}
-
-	public void digDirtStoneFromUnder(CommandSender sender, Player p)
-	{
-		World w = p.getWorld();
-		Block b = p.getLocation().getBlock().getRelative(BlockFace.DOWN);
-		sender.sendMessage("Type is: " + b.getType());
-		// sender.sendMessage("Type is: " +
-		// b.getRelative(BlockFace.DOWN).getType());
-		// sender.sendMessage("Type is: " +
-		// b.getRelative(BlockFace.DOWN).getRelative(BlockFace.DOWN).getType());
-		if (p.isFlying())
-			p.setFlying(false);
-		eraseDirtStone(w, b);
-	}
-
-	public void eraseDirtStone(World w, Block b)
-	{
-		if (b.getType() == Material.DIRT || b.getType() == Material.STONE
-				|| b.getType() == Material.GRASS)
-		{
-			b.setType(Material.AIR);
-		}
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
-		if (label.equals("dig"))
-		{
-			if (args.length == 0)
-			{
-				Player paul = getServer().getPlayer("prettysprinkles");
-				digDirtStoneFromUnder(sender, paul);
-			}
-			else if(args.length == 1)
-			{
-				if(args[0].equals("creep"))
-				{
-					Player paul = getServer().getPlayer("prettysprinkles");
-					paul.getWorld().playEffect(paul.getLocation(), Effect.GHAST_SHRIEK, 0);
-					sender.sendMessage("Played sound");
-				}
-			}
-			return true;
-		}
-
 		if (!(sender instanceof Player))
 		{
 			sender.sendMessage("Only players can play Rock Paper Scissors.");
