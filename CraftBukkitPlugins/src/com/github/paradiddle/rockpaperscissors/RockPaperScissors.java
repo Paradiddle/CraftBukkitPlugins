@@ -149,11 +149,11 @@ public class RockPaperScissors extends JavaPlugin implements CommandExecutor
 		switch (s)
 		{
 		case ROCK:
-			return (firstCap ? "Rock" : "rock");
+			return (firstCap ? "R" : "r") + "ock";
 		case PAPER:
-			return (firstCap ? "Paper" : "paper");
+			return (firstCap ? "P" : "p") + "aper";
 		case SCISSORS:
-			return (firstCap ? "Scissors" : "scissors");
+			return (firstCap ? "S" : "s") + "cissors";
 		}
 		return "";
 	}
