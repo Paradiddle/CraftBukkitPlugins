@@ -10,6 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.github.paradiddle.jmaze.generators.DepthFirstSearch;
 import com.github.paradiddle.jmaze.generators.RecursiveDivision;
 
 public class ExecutorMaze implements CommandExecutor
@@ -46,7 +47,9 @@ public class ExecutorMaze implements CommandExecutor
 		}
 		sender.sendMessage("Creating maze of size " + w + " x " + h);
 		Maze m = new Maze(w, h);
-		RecursiveDivision.generateMaze(m);
+		DepthFirstSearch dfs = new DepthFirstSearch();
+		
+		dfs.generateMaze(m);
 
 		Location l = p.getLocation();
 		l = l.getBlock().getRelative(BlockFace.DOWN).getLocation();

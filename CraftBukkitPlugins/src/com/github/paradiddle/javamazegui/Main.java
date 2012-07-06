@@ -1,5 +1,7 @@
 package com.github.paradiddle.javamazegui;
+
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -12,7 +14,7 @@ import javax.swing.JFrame;
 
 import com.github.paradiddle.jmaze.Maze;
 import com.github.paradiddle.jmaze.MazeSolver;
-import com.github.paradiddle.jmaze.generators.RecursiveDivision;
+import com.github.paradiddle.jmaze.generators.DepthFirstSearch;
 
 public class Main extends JFrame implements KeyListener
 {
@@ -35,16 +37,15 @@ public class Main extends JFrame implements KeyListener
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		maze = new Maze(mazeWidth, mazeHeight);
-		RecursiveDivision.generateMaze(maze);
-
+		
 		Container c = getContentPane();
 
 		mCanvas = new MazeCanvas(this);
 		settings = new SettingsPanel(this);
-
+		
 		c.setLayout(new BorderLayout());
 		c.add(mCanvas, BorderLayout.CENTER);
-		c.add(settings, BorderLayout.LINE_END);
+		c.add(settings, BorderLayout.EAST);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -92,18 +93,22 @@ public class Main extends JFrame implements KeyListener
 	
 	public void generate()
 	{
-		mCanvas.setSize(mazeWidth * blockWidth, mazeHeight * blockHeight);
-		pack();
 		maze = new Maze(mazeWidth, mazeHeight);
 		maze.reset();
 		maze.addBorder();
-		RecursiveDivision.generateMaze(maze);
+		settings.getMazeGenerator().generateMaze(maze);
+		maze.addBorder();
 		mCanvas.repaint();
 	}
 	
 	public void solve()
 	{
 		MazeSolver.solve(maze);
+		mCanvas.repaint();
+	}
+	
+	public void paintMaze()
+	{
 		mCanvas.repaint();
 	}
 
@@ -126,6 +131,11 @@ public class Main extends JFrame implements KeyListener
 				}
 			}
 		}
+	}
+	
+	public Canvas getMapCanvas()
+	{
+		return mCanvas;
 	}
 
 	@Override
