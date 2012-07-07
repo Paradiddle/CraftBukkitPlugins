@@ -3,6 +3,7 @@ package com.github.paradiddle.testingutils;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -78,10 +79,18 @@ public class ExecutorBlockInformation implements CommandExecutor, Listener
 		if(printBlockStats.get(p) == null)
 			printBlockStats.put(p, true);
 		
-		if(printBlockStats.get(p) && e.isSneaking())
+		if(printBlockStats.get(p) && e.isSneaking() && p.getItemInHand().getType() == Material.WATER_BUCKET)
 		{
 			Block lookingAt = Utilities.getLookingAtBlock(p);
-			printBlockInformation(p, lookingAt);
+			if(lookingAt.getType() == Material.AIR)
+				return;
+			for(int x = lookingAt.getX() - 1; x < lookingAt.getX() + 2; x++)
+			{
+				for(int z = lookingAt.getZ() - 1; z < lookingAt.getZ() + 2; z++)
+				{
+					p.getWorld().getBlockAt(x, lookingAt.getY(), z).setType(Material.WATER);
+				}
+			}
 		}
 	}
 	
