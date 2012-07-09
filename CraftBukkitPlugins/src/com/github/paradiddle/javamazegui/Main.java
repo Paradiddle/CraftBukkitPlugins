@@ -18,8 +18,8 @@ import com.github.paradiddle.jmaze.generators.DepthFirstSearch;
 
 public class Main extends JFrame implements KeyListener
 {
-	private int blockWidth = 5;
-	private int blockHeight = 5;
+	private int blockWidth = 1;
+	private int blockHeight = 1;
 
 	private int mazeWidth = 71;
 	private int mazeHeight = 71;

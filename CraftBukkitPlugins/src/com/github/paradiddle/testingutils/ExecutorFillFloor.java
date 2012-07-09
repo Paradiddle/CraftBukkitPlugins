@@ -52,10 +52,12 @@ public class ExecutorFillFloor implements CommandExecutor
 				{
 					if(look.getX() == lookingAt.getX())
 					{
+						// Z-axis wall
 						fillWall(p, m, lookingAt.getX(), lookingAt.getY(), lookingAt.getZ(), 0, 1);
 					}
 					else
 					{
+						// X-axis wall
 						fillWall(p, m, lookingAt.getX(), lookingAt.getY(), lookingAt.getZ(), 1, 0);						
 					}
 				}

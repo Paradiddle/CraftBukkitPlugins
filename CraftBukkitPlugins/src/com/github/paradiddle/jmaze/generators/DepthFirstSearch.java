@@ -18,10 +18,6 @@ public class DepthFirstSearch implements MazeGenerator
 		NORTH, SOUTH, EAST, WEST;
 	}
 	
-	public DepthFirstSearch()
-	{
-	}
-	
 	public void generateMaze(Maze maze)
 	{
 		this.maze = maze;
@@ -45,7 +41,7 @@ public class DepthFirstSearch implements MazeGenerator
 		}
 	}
 	
-	public void expandMaze()
+	private void expandMaze()
 	{
 		Point curP = stack.peek();
 		List<Dir> dirs = getOpenDirections(curP);
@@ -63,7 +59,7 @@ public class DepthFirstSearch implements MazeGenerator
 		stack.push(twoStep);
 	}
 	
-	public List<Dir> getOpenDirections(Point p)
+	private List<Dir> getOpenDirections(Point p)
 	{
 		LinkedList<Dir> dirs = new LinkedList<Dir>();
 		if(isOpen(p.getRelativePoint(Dir.NORTH, 2)))
@@ -84,7 +80,7 @@ public class DepthFirstSearch implements MazeGenerator
 		return maze.get(p.x, p.y) == 1;
 	}
 	
-	class Point
+	private class Point
 	{
 		public int x, y;
 		

@@ -48,6 +48,7 @@ public class RockPaperScissors extends JavaPlugin implements CommandExecutor
 
 		Player pFrom = (Player) sender;
 		Player pTo = getServer().getPlayer(args[0]);
+		
 		if (pTo == null)
 		{
 			sender.sendMessage("Cannot find player " + args[0]);
