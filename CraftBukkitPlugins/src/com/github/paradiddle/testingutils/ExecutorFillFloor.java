@@ -38,10 +38,30 @@ public class ExecutorFillFloor implements CommandExecutor
 		if (m.isBlock())
 		{
 			count = 0;
-			setMaterialLocation(p, m, lookingAt);
+			if (label.equals("floor"))
+				fillFloor(p, m, lookingAt);
+			else if(label.equals("wall"))
+			{
+				Block look = Utilities.getLookingAtBlock(p);
+				if(look.getX() == lookingAt.getX() && look.getZ() == lookingAt.getZ())
+				{
+					p.sendMessage("Cannot built a wall here.");
+					return true;
+				}
+				else
+				{
+					if(look.getX() == lookingAt.getX())
+					{
+						fillWall(p, m, lookingAt.getX(), lookingAt.getY(), lookingAt.getZ(), 0, 1);
+					}
+					else
+					{
+						fillWall(p, m, lookingAt.getX(), lookingAt.getY(), lookingAt.getZ(), 1, 0);						
+					}
+				}
+			}
 			p.sendMessage("Success! Placed " + count + " " + m + " as a floor.");
-		}
-		else
+		} else
 		{
 			p.sendMessage("Cannot place this type of block.");
 			return true;
@@ -50,7 +70,7 @@ public class ExecutorFillFloor implements CommandExecutor
 		return true;
 	}
 
-	private void setMaterialLocation(Player p, Material mat, Block b)
+	private void fillFloor(Player p, Material mat, Block b)
 	{
 		if (count > max_count)
 			return;
@@ -59,11 +79,28 @@ public class ExecutorFillFloor implements CommandExecutor
 			b.setType(mat);
 			count++;
 
-			setMaterialLocation(p, mat, b.getRelative(BlockFace.SOUTH));
-			setMaterialLocation(p, mat, b.getRelative(BlockFace.NORTH));
-			setMaterialLocation(p, mat, b.getRelative(BlockFace.EAST));
-			setMaterialLocation(p, mat, b.getRelative(BlockFace.WEST));
+			fillFloor(p, mat, b.getRelative(BlockFace.SOUTH));
+			fillFloor(p, mat, b.getRelative(BlockFace.NORTH));
+			fillFloor(p, mat, b.getRelative(BlockFace.EAST));
+			fillFloor(p, mat, b.getRelative(BlockFace.WEST));
 		}
 	}
 
+	private void fillWall(Player p, Material mat, int x, int y, int z, int xOffset, int zOffset)
+	{
+		Block b = p.getWorld().getBlockAt(x, y, z);
+		
+		if (count > max_count)
+			return;
+		if (b.getType() == Material.AIR)
+		{
+			b.setType(mat);
+			count++;
+
+			fillWall(p, mat, x, y - 1, z, xOffset, zOffset);
+			fillWall(p, mat, x, y + 1, z, xOffset, zOffset);
+			fillWall(p, mat, x + xOffset, y, z + zOffset, xOffset, zOffset);
+			fillWall(p, mat, x - xOffset, y, z - zOffset, xOffset, zOffset);
+		}
+	}
 }

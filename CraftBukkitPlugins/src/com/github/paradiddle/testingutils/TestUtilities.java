@@ -17,6 +17,7 @@ public class TestUtilities extends JavaPlugin
 		getCommand("binfo").setExecutor(binfoExecutor);
 		getCommand("worlds").setExecutor(worldlistExecutor);
 		getCommand("floor").setExecutor(fillFloorExecutor);
+		getCommand("wall").setExecutor(fillFloorExecutor);
 		getServer().getPluginManager().registerEvents(binfoExecutor, this);
 		
 		super.onEnable();

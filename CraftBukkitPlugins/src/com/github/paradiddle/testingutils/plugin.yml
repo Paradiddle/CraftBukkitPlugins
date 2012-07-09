@@ -22,3 +22,8 @@ commands:
     usage: /floor (look at wall block)
     permission: <plugin name>.basic
     permission-message: You don't have <permission>
+  wall:
+    description: This command allows you to easily build a wall.
+    usage: /wall (look at wall block)
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
