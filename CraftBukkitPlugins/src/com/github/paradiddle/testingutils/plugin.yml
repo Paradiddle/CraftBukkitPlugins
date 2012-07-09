@@ -27,3 +27,13 @@ commands:
     usage: /wall (look at wall block)
     permission: <plugin name>.basic
     permission-message: You don't have <permission>
+  coords:
+    description: This command brodcasts your coordinates.
+    usage: /coords
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+  snowbgone:
+    description: This command removes snow in a large area around the player.
+    usage: /snowbgone
+    permission: <plugin name>.basic
+    permission-message: You don't have <permission>
