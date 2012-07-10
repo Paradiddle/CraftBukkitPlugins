@@ -26,7 +26,7 @@ public class ExecutorCoordsBroadcast implements CommandExecutor
 		
 		Player p = (Player)sender;
 		Location l = p.getLocation();
-		plugin.getServer().broadcastMessage("My coordinates are X: " + l.getBlockX() + " Y: " + l.getBlockY() + " Z: " + l.getBlockZ());
+		plugin.getServer().broadcastMessage(p.getName() + "'s coordinates are X: " + l.getBlockX() + " Y: " + l.getBlockY() + " Z: " + l.getBlockZ());
 		
 		return true;
 	}

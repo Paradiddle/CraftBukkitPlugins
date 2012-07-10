@@ -13,9 +13,9 @@ import org.bukkit.entity.Player;
 public class ExecutorSnowRemoval implements CommandExecutor
 {
 	private TestUtilities plugin;
-	
+
 	private static final int NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3;
-	
+
 	public ExecutorSnowRemoval(TestUtilities plugin)
 	{
 		this.plugin = plugin;
@@ -24,49 +24,42 @@ public class ExecutorSnowRemoval implements CommandExecutor
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
-		if(!(sender instanceof Player))
+		if (!(sender instanceof Player))
 		{
 			sender.sendMessage("Must be a player to execute this command.");
 			return true;
 		}
-		
-		Player p = (Player)sender;
+
+		Player p = (Player) sender;
 		Location l = p.getLocation();
 		Chunk c = l.getChunk();
-		
+
 		int total = 0;
 		long time = System.currentTimeMillis();
-		
-		total += removeSnow(c);
-		total += removeSnow(getRelativeChunk(c, NORTH));
-		total += removeSnow(getRelativeChunk(c, SOUTH));
-		total += removeSnow(getRelativeChunk(c, EAST));
-		total += removeSnow(getRelativeChunk(c, WEST));
 
-		total += removeSnow(getRelativeChunk(c, NORTH, EAST));
-		total += removeSnow(getRelativeChunk(c, SOUTH, WEST));
-		total += removeSnow(getRelativeChunk(c, EAST, SOUTH));
-		total += removeSnow(getRelativeChunk(c, WEST, NORTH));
-	
+		total += removeSnow(p, 200, 200);
+
 		long timeTaken = System.currentTimeMillis() - time;
 		p.sendMessage("Successfully removed " + total + " blocks of snow. (" + timeTaken + " ms)");
-		
+
 		return true;
 	}
-	
-	public int removeSnow(Chunk c)
+
+	public int removeSnow(Player p, int w, int h)
 	{
 		Block b = null;
 		int numSnowRemoved = 0;
-		
-		for(int x = 0; x <= 15; x++)
+		int px = p.getLocation().getBlockX();
+		int pz = p.getLocation().getBlockZ();
+
+		for (int x = px - (w / 2); x <= px + (w / 2); x++)
 		{
-			for(int y = 0; y <= 127; y++)
+			for (int y = 0; y < 127; y++)
 			{
-				for(int z = 0; z <= 15; z++)
+				for (int z = pz - (h / 2); z <= pz + (h / 2); z++)
 				{
-					b = c.getBlock(z, y, z);
-					if(b.getType() == Material.SNOW)
+					b = p.getWorld().getBlockAt(x, y, z);
+					if (b.getType() == Material.SNOW)
 					{
 						b.setType(Material.AIR);
 						numSnowRemoved++;
@@ -75,30 +68,5 @@ public class ExecutorSnowRemoval implements CommandExecutor
 			}
 		}
 		return numSnowRemoved;
-	}
-	
-	public Chunk getRelativeChunk(Chunk c, int... dirs)
-	{
-		World w = c.getWorld();
-		int xOffset = 0, zOffset = 0;
-		for(int dir: dirs)
-		{
-			switch(dir)
-			{
-			case NORTH:
-				zOffset += 16;
-				break;
-			case EAST:
-				xOffset += 16;
-				break;
-			case SOUTH:
-				zOffset -= 16;
-				break;
-			case WEST:
-				xOffset -= 16;
-				break;
-			}
-		}
-		return w.getChunkAt(c.getX() + xOffset, c.getZ() + zOffset);	
 	}
 }
