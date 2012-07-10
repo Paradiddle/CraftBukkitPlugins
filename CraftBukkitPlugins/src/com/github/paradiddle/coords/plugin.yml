@@ -1,0 +1,9 @@
+name: Coords
+version: 0.1
+main: com.github.paradiddle.coords.CoordsPlugin
+commands:
+  coords:
+    description: This command broadcasts your coordinates.
+    usage: /coords
+    permission: coords.basic
+    permission-message: You don't have <permission>
