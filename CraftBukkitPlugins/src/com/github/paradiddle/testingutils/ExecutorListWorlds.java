@@ -24,7 +24,7 @@ public class ExecutorListWorlds implements CommandExecutor
 		if(args.length != 0)
 			return false;
 		List<World> worlds = plugin.getServer().getWorlds();
-		sender.sendMessage(ChatColor.MAGIC + "Worlds:");
+		sender.sendMessage(ChatColor.RED + "Worlds:");
 		int count = 1;
 		for(World w: worlds)
 		{
