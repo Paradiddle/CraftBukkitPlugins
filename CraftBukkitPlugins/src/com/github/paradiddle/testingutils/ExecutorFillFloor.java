@@ -32,15 +32,17 @@ public class ExecutorFillFloor implements CommandExecutor
 		Player p = (Player) sender;
 
 		Block lookingAt = Utilities.getLookingAtAir(p);
-		if(lookingAt == null)
+		Block lookingAtIncludingWater = Utilities.getLookingAtBlockIncludingWater(p);
+		if(lookingAt == null || lookingAtIncludingWater == null)
 		{
 			sender.sendMessage("no block found");
 			return true;
 		}
 
+		count = 0;
 		if (label.equals("shamwow"))
 		{
-			deleteWater(p, lookingAt);
+			deleteWater(p, lookingAtIncludingWater);
 			p.sendMessage("Success! Cleared " + count + " blocks of water.");
 			return true;
 		}
@@ -49,7 +51,6 @@ public class ExecutorFillFloor implements CommandExecutor
 		
 		if (m.isBlock())
 		{
-			count = 0;
 			if (label.equals("floor"))
 			{
 				fillFloor(p, m, lookingAt);

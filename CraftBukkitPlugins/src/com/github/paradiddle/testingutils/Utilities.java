@@ -12,15 +12,22 @@ public class Utilities
 	static HashSet<Byte> trans = new HashSet<Byte>();
 	static
 	{
-		trans.add(new Byte((byte) 31));
-		trans.add(new Byte((byte) 0));
-		trans.add(new Byte((byte) 8));
-		trans.add(new Byte((byte) 9));
+		trans.add(new Byte((byte) Material.GRASS.getId()));
+		trans.add(new Byte((byte) Material.AIR.getId()));
+		trans.add(new Byte((byte) Material.WATER.getId()));
+		trans.add(new Byte((byte) Material.STATIONARY_WATER.getId()));
 	}
 	public static Block getLookingAtBlock(Player p)
 	{
-
 		List<Block> lookingAt = p.getLineOfSight(trans, 20);
+		if(lookingAt.size() > 0)
+			return lookingAt.get(lookingAt.size() - 1);
+		return null;
+	}
+	
+	public static Block getLookingAtBlockIncludingWater(Player p)
+	{
+		List<Block> lookingAt = p.getLineOfSight(null, 20);
 		if(lookingAt.size() > 0)
 			return lookingAt.get(lookingAt.size() - 1);
 		return null;
