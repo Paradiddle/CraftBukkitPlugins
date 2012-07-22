@@ -38,7 +38,15 @@ public class ExecutorFillFloor implements CommandExecutor
 			return true;
 		}
 
+		if (label.equals("shamwow"))
+		{
+			deleteWater(p, lookingAt);
+			p.sendMessage("Success! Cleared " + count + " blocks of water.");
+			return true;
+		}
+		
 		Material m = p.getItemInHand().getType();
+		
 		if (m.isBlock())
 		{
 			count = 0;
@@ -46,11 +54,6 @@ public class ExecutorFillFloor implements CommandExecutor
 			{
 				fillFloor(p, m, lookingAt);
 				p.sendMessage("Success! Placed " + count + " " + m + " as a floor.");
-			}
-			else if (label.equals("shamwow"))
-			{
-				deleteWater(p, lookingAt);
-				p.sendMessage("Success! Cleared " + count + " blocks of water.");
 			}
 			else if(label.equals("wall"))
 			{
