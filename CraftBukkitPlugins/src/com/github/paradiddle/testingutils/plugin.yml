@@ -36,4 +36,9 @@ commands:
     description: This command removes water in a large area around the player.
     usage: /shamwow
     permission: <plugin name>.basic
+    permission-message: You don't have <permission>
+  fillwater:
+    description: This command fills water up to a certain specified height.
+    usage: /fillwater [height]
+    permission: <plugin name>.basic
     permission-message: You're too gay to use <permission>

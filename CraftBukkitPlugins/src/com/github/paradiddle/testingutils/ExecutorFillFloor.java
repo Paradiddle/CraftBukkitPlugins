@@ -13,7 +13,7 @@ public class ExecutorFillFloor implements CommandExecutor
 	private TestUtilities plugin;
 
 	private int count = 0;
-	private int max_count = 128;
+	private int max_wall_floor_count = 128;
 
 	public ExecutorFillFloor(TestUtilities plugin)
 	{
@@ -32,18 +32,9 @@ public class ExecutorFillFloor implements CommandExecutor
 		Player p = (Player) sender;
 
 		Block lookingAt = Utilities.getLookingAtAir(p);
-		Block lookingAtIncludingWater = Utilities.getLookingAtBlockIncludingWater(p);
-		if(lookingAt == null || lookingAtIncludingWater == null)
+		if(lookingAt == null)
 		{
 			sender.sendMessage("no block found");
-			return true;
-		}
-
-		count = 0;
-		if (label.equals("shamwow"))
-		{
-			deleteWater(p, lookingAtIncludingWater);
-			p.sendMessage("Success! Cleared " + count + " blocks of water.");
 			return true;
 		}
 		
@@ -90,7 +81,7 @@ public class ExecutorFillFloor implements CommandExecutor
 
 	private void fillFloor(Player p, Material mat, Block b)
 	{
-		if (count > max_count)
+		if (count > max_wall_floor_count)
 			return;
 		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
 		{
@@ -108,7 +99,7 @@ public class ExecutorFillFloor implements CommandExecutor
 	{
 		Block b = p.getWorld().getBlockAt(x, y, z);
 		
-		if (count > max_count)
+		if (count > max_wall_floor_count)
 			return;
 		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER  )
 		{
@@ -122,21 +113,5 @@ public class ExecutorFillFloor implements CommandExecutor
 		}
 	}
 	
-	private void deleteWater(Player p, Block b)
-	{
-		if (count > max_count)
-			return;
-		if (b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
-		{
-			b.setType(Material.AIR);
-			count++;
-
-			deleteWater(p, b.getRelative(BlockFace.SOUTH));
-			deleteWater(p, b.getRelative(BlockFace.NORTH));
-			deleteWater(p, b.getRelative(BlockFace.EAST));
-			deleteWater(p, b.getRelative(BlockFace.WEST));
-			deleteWater(p, b.getRelative(BlockFace.UP));
-			deleteWater(p, b.getRelative(BlockFace.DOWN));
-		}
-	}
+	
 }

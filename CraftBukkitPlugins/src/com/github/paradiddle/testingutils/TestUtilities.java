@@ -11,6 +11,8 @@ public class TestUtilities extends JavaPlugin
 	ExecutorListWorlds worldlistExecutor = new ExecutorListWorlds(this);
 	ExecutorFillFloor fillFloorExecutor = new ExecutorFillFloor(this);
 	ExecutorSnowRemoval snowRemovalExecutor = new ExecutorSnowRemoval(this);
+	ExecutorShamwow shamwowExecutor = new ExecutorShamwow(this);
+	ExecutorFillWater fillWaterExecutor = new ExecutorFillWater(this);
 	
 	@Override
 	public void onEnable()
@@ -20,7 +22,8 @@ public class TestUtilities extends JavaPlugin
 		getCommand("floor").setExecutor(fillFloorExecutor);
 		getCommand("wall").setExecutor(fillFloorExecutor);
 		getCommand("snowbgone").setExecutor(snowRemovalExecutor);
-		getCommand("shamwow").setExecutor(fillFloorExecutor);
+		getCommand("shamwow").setExecutor(shamwowExecutor);
+		getCommand("fillwater").setExecutor(fillWaterExecutor);
 		getServer().getPluginManager().registerEvents(binfoExecutor, this);
 		
 		super.onEnable();
