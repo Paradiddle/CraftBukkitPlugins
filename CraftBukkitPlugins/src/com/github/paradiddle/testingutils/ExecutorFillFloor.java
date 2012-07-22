@@ -32,19 +32,27 @@ public class ExecutorFillFloor implements CommandExecutor
 		Player p = (Player) sender;
 
 		Block lookingAt = Utilities.getLookingAtAir(p);
+		if(lookingAt == null)
+		{
+			sender.sendMessage("no block found");
+			return true;
+		}
 
 		Material m = p.getItemInHand().getType();
 		if (m.isBlock())
 		{
 			count = 0;
 			if (label.equals("floor"))
+			{
 				fillFloor(p, m, lookingAt);
+				p.sendMessage("Success! Placed " + count + " " + m + " as a floor.");
+			}
 			else if(label.equals("wall"))
 			{
 				Block look = Utilities.getLookingAtBlock(p);
 				if(look.getX() == lookingAt.getX() && look.getZ() == lookingAt.getZ())
 				{
-					p.sendMessage("Cannot built a wall here.");
+					p.sendMessage("Cannot build a wall here.");
 					return true;
 				}
 				else
@@ -60,8 +68,8 @@ public class ExecutorFillFloor implements CommandExecutor
 						fillWall(p, m, lookingAt.getX(), lookingAt.getY(), lookingAt.getZ(), 1, 0);						
 					}
 				}
+				p.sendMessage("Success! Placed " + count + " " + m + " as a wall.");
 			}
-			p.sendMessage("Success! Placed " + count + " " + m + " as a floor.");
 		} else
 		{
 			p.sendMessage("Cannot place this type of block.");
@@ -75,7 +83,7 @@ public class ExecutorFillFloor implements CommandExecutor
 	{
 		if (count > max_count)
 			return;
-		if (b.getType() == Material.AIR)
+		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
 		{
 			b.setType(mat);
 			count++;
@@ -93,7 +101,7 @@ public class ExecutorFillFloor implements CommandExecutor
 		
 		if (count > max_count)
 			return;
-		if (b.getType() == Material.AIR)
+		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
 		{
 			b.setType(mat);
 			count++;

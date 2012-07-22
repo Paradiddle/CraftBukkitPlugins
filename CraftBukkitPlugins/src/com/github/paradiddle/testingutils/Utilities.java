@@ -14,6 +14,8 @@ public class Utilities
 	{
 		trans.add(new Byte((byte) 31));
 		trans.add(new Byte((byte) 0));
+		trans.add(new Byte((byte) 8));
+		trans.add(new Byte((byte) 9));
 	}
 	public static Block getLookingAtBlock(Player p)
 	{
@@ -26,7 +28,7 @@ public class Utilities
 	
 	public static Block getLookingAtAir(Player p)
 	{
-		List<Block> lookingAt = p.getLineOfSight(null, 20);
+		List<Block> lookingAt = p.getLineOfSight(trans, 20);
 		if(lookingAt.size() > 1)
 			return lookingAt.get(lookingAt.size() - 2);
 		return null;
