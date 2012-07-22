@@ -47,6 +47,11 @@ public class ExecutorFillFloor implements CommandExecutor
 				fillFloor(p, m, lookingAt);
 				p.sendMessage("Success! Placed " + count + " " + m + " as a floor.");
 			}
+			else if (label.equals("shamwow"))
+			{
+				deleteWater(p, lookingAt);
+				p.sendMessage("Success! Cleared " + count + " blocks of water.");
+			}
 			else if(label.equals("wall"))
 			{
 				Block look = Utilities.getLookingAtBlock(p);
@@ -101,7 +106,7 @@ public class ExecutorFillFloor implements CommandExecutor
 		
 		if (count > max_count)
 			return;
-		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
+		if (b.getType() == Material.AIR || b.getType() == Material.STATIONARY_WATER  )
 		{
 			b.setType(mat);
 			count++;
@@ -110,6 +115,24 @@ public class ExecutorFillFloor implements CommandExecutor
 			fillWall(p, mat, x, y + 1, z, xOffset, zOffset);
 			fillWall(p, mat, x + xOffset, y, z + zOffset, xOffset, zOffset);
 			fillWall(p, mat, x - xOffset, y, z - zOffset, xOffset, zOffset);
+		}
+	}
+	
+	private void deleteWater(Player p, Block b)
+	{
+		if (count > max_count)
+			return;
+		if (b.getType() == Material.STATIONARY_WATER || b.getType() == Material.WATER)
+		{
+			b.setType(Material.AIR);
+			count++;
+
+			deleteWater(p, b.getRelative(BlockFace.SOUTH));
+			deleteWater(p, b.getRelative(BlockFace.NORTH));
+			deleteWater(p, b.getRelative(BlockFace.EAST));
+			deleteWater(p, b.getRelative(BlockFace.WEST));
+			deleteWater(p, b.getRelative(BlockFace.UP));
+			deleteWater(p, b.getRelative(BlockFace.DOWN));
 		}
 	}
 }

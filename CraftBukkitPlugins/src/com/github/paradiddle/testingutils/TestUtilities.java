@@ -20,6 +20,7 @@ public class TestUtilities extends JavaPlugin
 		getCommand("floor").setExecutor(fillFloorExecutor);
 		getCommand("wall").setExecutor(fillFloorExecutor);
 		getCommand("snowbgone").setExecutor(snowRemovalExecutor);
+		getCommand("shamwow").setExecutor(fillFloorExecutor);
 		getServer().getPluginManager().registerEvents(binfoExecutor, this);
 		
 		super.onEnable();
